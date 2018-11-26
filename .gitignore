@@ -1,25 +1,26 @@
-/target/
-!.mvn/wrapper/maven-wrapper.jar
-
-### STS ###
-.apt_generated
+**/.idea
+**/.pmd
+**/.eclipse-pmd
+*.eml
+*~
+.*swp
 .classpath
-.factorypath
+**/*.iml
+**/*.ipr
+**/*.iws
+.DS_Store
+.metadata
 .project
 .settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+**/.idea
 *.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/build/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+eclipse-target
+target
+.AppleDouble
+.directory
+.idea
+intellij-config
+elastic-search-queries.log
+logs
+data
+*.log
