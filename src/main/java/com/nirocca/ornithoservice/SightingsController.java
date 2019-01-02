@@ -17,6 +17,7 @@ public class SightingsController {
     public String last3days(Model model) {
         List<Sighting> lastSightings = sightingsCalculator.getLastSightings();
         model.addAttribute("sightings", lastSightings);
+        model.addAttribute("lastCalculated", sightingsCalculator.getLastCalculated());
         return "last3days";
     }
 }
