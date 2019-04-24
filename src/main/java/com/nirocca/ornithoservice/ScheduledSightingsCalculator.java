@@ -21,8 +21,8 @@ public class ScheduledSightingsCalculator {
     private ZonedDateTime lastCalculated = ZonedDateTime.of(LocalDateTime.MIN, TIMEZONE);
 
 
-    //12 hours
-    @Scheduled(fixedDelay = 43200000)
+    //6 hours
+    @Scheduled(fixedDelay = 21600000)
     public void calculate() throws IOException {
         lastSightings = Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_3_DAYS.getUrl(), SortBy.SPECIES);
         lastCalculated = ZonedDateTime.now(TIMEZONE);
