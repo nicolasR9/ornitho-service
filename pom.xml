@@ -58,7 +58,7 @@
 		<dependency>
 			<groupId>com.nirocca</groupId>
 			<artifactId>ornithoalert</artifactId>
-			<version>0.0.7-SNAPSHOT</version>
+			<version>0.0.8-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
