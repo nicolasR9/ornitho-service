@@ -19,9 +19,5 @@ public class SightingsCalculator {
         return Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_3_DAYS.getUrl(), SortBy.SPECIES);
     }
 
-    List<Sighting> getLastSightingsZingst() throws IOException {
-        return Main.calcSightings(OrnithoUrl.ZINGST_3_DAYS.getUrl(), SortBy.SPECIES);
-    }
-
 
 }

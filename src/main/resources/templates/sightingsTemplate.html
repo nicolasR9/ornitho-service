@@ -12,6 +12,7 @@
     <th>Datum</th>
     <th>Ort</th>
     <th>URL</th>
+    <th>Map</th>
   </tr>
   </thead>
   <tbody>
@@ -20,7 +21,7 @@
     <td th:text="${sighting.date}"></td>
     <td th:text="${sighting.location}"></td>
     <td><a href="url" target="_blank" th:href="${sighting.url}">url</a></td>
-  </tr>
+    <td><a href="url" target="_blank" th:href="${sighting.navigateUrl}">map</a></td>
   </tbody>
 </table>
 </body>

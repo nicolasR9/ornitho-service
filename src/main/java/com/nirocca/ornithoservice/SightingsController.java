@@ -1,8 +1,10 @@
 package com.nirocca.ornithoservice;
 
+import com.nirocca.ornithoalert.CoordinatesExporter;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +19,19 @@ public class SightingsController {
     @GetMapping("/last3days")
     public String last3days(Model model) throws IOException {
         List<Sighting> lastSightings = sightingsCalculator.getLastSightings();
-        model.addAttribute("sightings", lastSightings);
+        List<SightingModel> modelSightings = lastSightings.stream()
+            .map(s -> {
+                try {
+                    return new SightingModel(s, CoordinatesExporter.getCoordinates(s.getUrl()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).collect(Collectors.toList());
+
+        model.addAttribute("sightings", modelSightings);
         return "sightingsTemplate";
     }
 
-    @GetMapping("/last3daysZingst")
-    public String last3daysZingst(Model model) throws IOException {
-        List<Sighting> lastSightings = sightingsCalculator.getLastSightingsZingst();
-        model.addAttribute("sightings", lastSightings);
-        return "sightingsTemplate";
-    }
 }
 
 
