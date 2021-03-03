@@ -8,13 +8,16 @@ import java.util.Locale;
 
 public class SightingModel {
 
-    private static final String HOME = "52.40552,13.21875";
+    public static final String HOME = "52.40552,13.21875";
+    public static final String NORDSEE = "54.24743,8.84237";
     private Sighting sighting;
     private Coordinates coordinates;
+    private String homeLocation;
 
-    public SightingModel(Sighting sighting, Coordinates coordinates) {
+    public SightingModel(Sighting sighting, Coordinates coordinates, String homeLocation) {
         this.sighting = sighting;
         this.coordinates = coordinates;
+        this.homeLocation = homeLocation;
     }
 
     public String getLatinName() {
@@ -44,6 +47,6 @@ public class SightingModel {
     public String getNavigateUrl() {
         DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         return String.format("http://maps.google.de/maps?saddr=%s&daddr=%s,%s",
-            HOME, df.format(coordinates.getLatitude()), df.format(coordinates.getLongitude()));
+            homeLocation, df.format(coordinates.getLatitude()), df.format(coordinates.getLongitude()));
     }
 }
