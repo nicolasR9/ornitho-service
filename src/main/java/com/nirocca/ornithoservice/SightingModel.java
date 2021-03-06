@@ -44,6 +44,10 @@ public class SightingModel {
         return sighting.getCount();
     }
 
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
     public String getNavigateUrl() {
         DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         return String.format("http://maps.google.de/maps?saddr=%s&daddr=%s,%s",

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SightingsController {
 
+    private static final double NORDSEE_NORTH_BORDER_LAT = 54.432914;
     @Autowired
     private SightingsCalculator sightingsCalculator;
 
@@ -46,6 +47,9 @@ public class SightingsController {
                 }
             }).collect(Collectors.toList());
 
+        modelSightings = modelSightings.stream().filter(
+            s -> s.getCoordinates().getLatitude() < NORDSEE_NORTH_BORDER_LAT).collect(Collectors.toList());
+
         model.addAttribute("sightings", modelSightings);
         return "sightingsTemplate";
     }
@@ -53,6 +57,13 @@ public class SightingsController {
     @GetMapping(value="/last3daysNordseeMap", produces= MediaType.TEXT_PLAIN_VALUE)
     public String last3daysNordseeMap(Model model) throws IOException {
         List<Sighting> lastSightings = sightingsCalculator.getLastSightingsNordsee();
+        lastSightings = lastSightings.stream().filter(s -> {
+            try {
+                return CoordinatesExporter.getCoordinates(s.getUrl()).getLatitude() < NORDSEE_NORTH_BORDER_LAT;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.toList());
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         new CoordinatesExporter().printCoordinates(lastSightings, false, outStream);
         String coordinatesAsText = outStream.toString();
