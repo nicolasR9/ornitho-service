@@ -5,7 +5,7 @@
 
 	<groupId>com.nirocca</groupId>
 	<artifactId>ornitho-service</artifactId>
-	<version>0.0.26-SNAPSHOT</version>
+	<version>0.0.32-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>ornitho-service</name>
@@ -58,7 +58,7 @@
 		<dependency>
 			<groupId>com.nirocca</groupId>
 			<artifactId>ornithoalert</artifactId>
-			<version>0.0.16-SNAPSHOT</version>
+			<version>0.0.22-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
