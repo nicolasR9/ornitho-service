@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+last calculated: <p th:text="${lastCalculated.toString()}"></p>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Datum</th>
+    <th>Ort</th>
+    <th>URL</th>
+    <th>Map</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sighting: ${sightings}">
+    <td th:text="${sighting.germanNamePlural}"></td>
+    <td th:text="${sighting.date}"></td>
+    <td th:text="${sighting.location}"></td>
+    <td><a href="url" target="_blank" th:href="${sighting.url}">url</a></td>
+    <td><a href="url" target="_blank" th:href="${sighting.navigateUrl}">map</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

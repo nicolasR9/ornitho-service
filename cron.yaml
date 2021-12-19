@@ -1,0 +1,4 @@
+cron:
+  - description: "ornitho email job"
+    url: /sendUpdateEmail
+    schedule: every 1 hours
