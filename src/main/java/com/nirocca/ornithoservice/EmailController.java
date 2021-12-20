@@ -1,15 +1,13 @@
 package com.nirocca.ornithoservice;
 
-import com.google.appengine.api.memcache.ErrorHandlers;
-import com.google.appengine.api.memcache.Expiration;
-import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.nirocca.ornithoalert.model.Sighting;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,35 +18,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class EmailController {
 
+    private static final String ENTITY_NAME = "Sighting";
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailController.class);
+
     @Autowired
     private SightingsCalculator sightingsCalculator;
 
     @Autowired
     private EmailSender emailSender;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailController.class);
-
     @GetMapping("/sendUpdateEmail")
     public void checkAndAlert() throws IOException {
         LOGGER.info("sendUpdateEmail started");
-        MemcacheService cache = getCache(); //make sure not to send the same sighting twice
 
-        List<Sighting> lastSightings = sightingsCalculator.getNewSightings();
-        lastSightings = lastSightings.stream().filter(s -> !cache.contains(s.getUrl())).collect(Collectors.toList());
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+        List<Sighting> lastSightings = sightingsCalculator.getSightingsBrandenburgTwoDays();
+        lastSightings = lastSightings.stream().filter(s -> !wasAlreadySentBefore(datastore, s)).collect(Collectors.toList());
         if (!lastSightings.isEmpty()) {
             LOGGER.info("sending email with {} sightings", lastSightings.size());
             emailSender.send(lastSightings);
-            Map<String, String> cacheMap = lastSightings.stream().collect(Collectors.toMap(Sighting::getUrl, (s) -> ""));
-            cache.putAll(cacheMap, Expiration.byDeltaSeconds((int) TimeUnit.DAYS.toSeconds(3)));
+
+            List<Entity> entities = lastSightings.stream().map(s -> new Entity(ENTITY_NAME, s.getUrl()))
+                .collect(Collectors.toList());
+            datastore.put(entities);
         } else {
             LOGGER.info("No new sightings.");
         }
     }
 
-    private MemcacheService getCache() {
-        MemcacheService cache = MemcacheServiceFactory.getMemcacheService();
-        cache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-        return cache;
+    private boolean wasAlreadySentBefore(DatastoreService datastore, Sighting s) {
+        try {
+            datastore.get(KeyFactory.createKey("Sighting", s.getUrl()));
+            return true;
+        } catch (EntityNotFoundException e) {
+            return false;
+        }
+
     }
 
 }

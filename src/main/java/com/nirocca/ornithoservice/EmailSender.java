@@ -31,8 +31,6 @@ public class EmailSender {
         Content content = new Content("text/html", createContent(lastSightings));
         Mail mail = new Mail(from, subject, to, content);
 
-        sendgritProperties.load(EmailSender.class.getResourceAsStream("/sendgrid.properties"));
-
         SendGrid sendgrid = new SendGrid(sendgritProperties.getProperty("key"));
 
         Request request = new Request();
@@ -51,7 +49,7 @@ public class EmailSender {
     }
 
     private String createContent(List<Sighting> lastSightings) throws IOException {
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         result.append("<html><body><h2>New Sightings:</h2><table><thead><tr><th>Name</th><th>Datum</th><th>Ort</th><th>URL</th><th>Map</th></tr></thead><tbody>");
         for (Sighting s : lastSightings) {
             SightingModel model = new SightingModel(s, CoordinatesExporter.getCoordinates(s.getUrl()), SightingModel.HOME);
