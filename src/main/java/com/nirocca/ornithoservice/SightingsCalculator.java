@@ -20,6 +20,6 @@ public class SightingsCalculator {
     }
 
     List<Sighting> getNewSightings() throws IOException {
-        return Main.calcSightings(OrnithoUrl.BRANDENBURG_NEW.getUrl(), SortBy.SPECIES);
+        return Main.calcSightings(OrnithoUrl.BRANDENBURG_LAST_2_DAYS.getUrl(), SortBy.SPECIES);
     }
 }
