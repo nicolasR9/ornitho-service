@@ -10,6 +10,7 @@ public class SightingModel {
 
     public static final String HOME = "52.40552,13.21875";
     public static final String NORDSEE = "54.24743,8.84237";
+
     private Sighting sighting;
     private Coordinates coordinates;
     private String homeLocation;

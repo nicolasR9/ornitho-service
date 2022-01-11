@@ -5,7 +5,7 @@
 
 	<groupId>com.nirocca</groupId>
 	<artifactId>ornitho-service</artifactId>
-	<version>0.0.51-SNAPSHOT</version>
+	<version>0.0.52-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>ornitho-service</name>
