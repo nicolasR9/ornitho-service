@@ -23,6 +23,10 @@ public class SightingsCalculator {
         return Main.calcSightings(ornithoUrl, SortBy.SPECIES);
     }
 
+    List<Sighting> getLastSightingsVacationNotThisYear(String ornithoUrl) throws IOException {
+        return Main.calcSightings(ornithoUrl, SortBy.SPECIES, true);
+    }
+
     List<Sighting> getSightingsBrandenburgTwoDays() throws IOException {
         return Main.calcSightings(OrnithoUrl.BRANDENBURG_LAST_2_DAYS.getUrl(), SortBy.SPECIES);
     }
