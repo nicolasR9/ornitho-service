@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Map input</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Params:</h1>
+<form action="#" th:action="@{/map}" th:object="${mapInput}" method="post">
+  <p>Url: <input type="text" th:field="*{url}" /></p>
+  <p> Filter my sightings:
+    <select name="filter" th:field="*{filter}">
+      <option th:each="filterOpt : ${T(com.nirocca.ornithoalert.Constants.FilterMySightedSpecies).values()}"
+              th:value="${filterOpt}" th:text="${filterOpt}"></option>
+    </select>
+  </p>
+  <p>Output:
+    <select name="outputType" th:field="*{outputType}">
+      <option th:each="outputTypeOpt : ${T(com.nirocca.ornithoservice.MapInput.OutputType).values()}"
+              th:value="${outputTypeOpt}" th:text="${outputTypeOpt}"></option>
+    </select>
+  </p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>

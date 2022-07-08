@@ -5,5 +5,5 @@ gcloud config set project ornitho-service  && \
 mvn clean install && \
 mvn appengine:deploy && \
 gcloud app deploy cron.yaml --quiet && \
-gcloud auth login nirocca@team.mobile.de  && \
+gcloud auth login nicolas.rocca@adevinta.com  && \
 gcloud config set project ecg-move-nonprod
