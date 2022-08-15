@@ -5,7 +5,7 @@
 
 	<groupId>com.nirocca</groupId>
 	<artifactId>ornitho-service</artifactId>
-	<version>0.0.60-SNAPSHOT</version>
+	<version>0.0.64-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>ornitho-service</name>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>com.nirocca</groupId>
 			<artifactId>ornithoalert</artifactId>
-			<version>0.0.31-SNAPSHOT</version>
+			<version>0.0.33-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
