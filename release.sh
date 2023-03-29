@@ -4,6 +4,4 @@ gcloud auth login nicolas.rocca@t-online.de && \
 gcloud config set project ornitho-service  && \
 mvn clean install && \
 mvn appengine:deploy && \
-gcloud app deploy cron.yaml --quiet && \
-gcloud auth login nicolas.rocca@adevinta.com  && \
-gcloud config set project ecg-move-nonprod
+gcloud app deploy cron.yaml --quiet
