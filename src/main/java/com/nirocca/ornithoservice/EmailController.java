@@ -58,6 +58,7 @@ public class EmailController {
         Firestore db = FirestoreClient.getFirestore();
 
         List<Sighting> lastSightings = sightingsCalculator.getSightingsBrandenburgTwoDays();
+        //List<Sighting> lastSightings = sightingsCalculator.getLastSightingsVacation(SightingsController.VACATION_SETTINGS.ornithoUrl);
         lastSightings = lastSightings.stream().filter(s -> !wasAlreadySentBefore(db, s)).collect(Collectors.toList());
         if (!lastSightings.isEmpty()) {
             LOGGER.info("sending email with {} sightings", lastSightings.size());
