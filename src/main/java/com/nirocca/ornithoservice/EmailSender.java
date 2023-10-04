@@ -53,6 +53,8 @@ public class EmailSender {
         result.append("<html><body><h2>New Sightings:</h2><table><thead><tr><th>Name</th><th>Datum</th><th>Ort</th><th>URL</th><th>Map</th></tr></thead><tbody>");
         for (Sighting s : lastSightings) {
             SightingModel model = new SightingModel(s, CoordinatesExporter.getCoordinates(s.getUrl()), SightingModel.HOME);
+            //SightingModel model = new SightingModel(s, CoordinatesExporter.getCoordinates(s.getUrl()), SightingsController.VACATION_SETTINGS.location);
+
             result.append(String.format("  <tr>"
                 + "    <td>%s</td>"
                 + "    <td>%s</td>"
