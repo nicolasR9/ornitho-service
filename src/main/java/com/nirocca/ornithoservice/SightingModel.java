@@ -11,47 +11,45 @@ public class SightingModel {
     public static final String HOME = "52.40552,13.21875";
     public static final String NORDSEE = "54.24743,8.84237";
 
-    private Sighting sighting;
-    private Coordinates coordinates;
-    private String homeLocation;
+    private final Sighting sighting;
+    private final String homeLocation;
 
-    public SightingModel(Sighting sighting, Coordinates coordinates, String homeLocation) {
+    public SightingModel(Sighting sighting, String homeLocation) {
         this.sighting = sighting;
-        this.coordinates = coordinates;
         this.homeLocation = homeLocation;
     }
 
     public String getLatinName() {
-        return sighting.getLatinName();
+        return sighting.latinName();
     }
 
     public String getLocation() {
-        return sighting.getLocation();
+        return sighting.locationText();
     }
 
     public String getGermanNamePlural() {
-        return sighting.getGermanNamePlural();
+        return sighting.germanName();
     }
 
     public String getUrl() {
-        return sighting.getUrl();
+        return sighting.url();
     }
 
     public String getDate() {
-        return sighting.getDate();
+        return sighting.date();
     }
 
     public String getCount() {
-        return sighting.getCount();
+        return sighting.count();
     }
 
     public Coordinates getCoordinates() {
-        return coordinates;
+        return sighting.coordinates();
     }
 
     public String getNavigateUrl() {
         DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         return String.format("http://maps.google.de/maps?saddr=%s&daddr=%s,%s",
-            homeLocation, df.format(coordinates.getLatitude()), df.format(coordinates.getLongitude()));
+            homeLocation, df.format(sighting.coordinates().getLatitude()), df.format(sighting.coordinates().getLongitude()));
     }
 }

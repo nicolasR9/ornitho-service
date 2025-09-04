@@ -26,7 +26,16 @@ public class SightingsCalculator {
             StatisticsCalculator.calcSpeciesSightedAlmostEveryYear(mySightings, 2);
         Set<String> frequentLatin = frequentSpecies.stream().map(Species::getLatinName).collect(Collectors.toSet());
         List<Sighting> lastSightings = Main.calcSightings(OrnithoUrl.GROSSRAUM_LAST_3_DAYS.getUrl(), SortBy.SPECIES, FilterMySightedSpecies.ONLY_THIS_YEAR);
-        return lastSightings.stream().filter(s -> !frequentLatin.contains(s.getLatinName())).collect(Collectors.toList());
+        return lastSightings.stream().filter(s -> !frequentLatin.contains(s.latinName())).collect(Collectors.toList());
+    }
+
+    List<Sighting> getRareSightingsBirdingtours() throws IOException {
+        List<com.nirocca.ornithoalert.statistics.Sighting> mySightings = StatisticsCalculator.readMySightings();
+        Set<Species> frequentSpecies =
+            StatisticsCalculator.calcSpeciesSightedAlmostEveryYear(mySightings, 2);
+        Set<String> frequentLatin = frequentSpecies.stream().map(Species::getLatinName).collect(Collectors.toSet());
+        List<Sighting> lastSightings = Main.calcSightings(SightingsController.VACATION_SETTINGS.ornithoUrl, SortBy.SPECIES, FilterMySightedSpecies.NO);
+        return lastSightings.stream().filter(s -> !frequentLatin.contains(s.latinName())).collect(Collectors.toList());
     }
 
     List<Sighting> getLastSightingsNotThisYear() throws IOException {

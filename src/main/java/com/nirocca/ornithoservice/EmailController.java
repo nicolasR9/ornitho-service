@@ -75,14 +75,14 @@ public class EmailController {
 
     private void putDoc(CollectionReference dbCollection, Sighting sighting)
         throws ExecutionException, InterruptedException {
-        DocumentReference docRef = dbCollection.document(URLEncoder.encode(sighting.getUrl(),
+        DocumentReference docRef = dbCollection.document(URLEncoder.encode(sighting.url(),
             Charset.defaultCharset()));
         ApiFuture<WriteResult> result = docRef.set(Collections.singletonMap("dummy", Boolean.TRUE));
         System.out.println("Added : " + result.get().getUpdateTime());
     }
 
     private boolean wasAlreadySentBefore(Firestore db, Sighting sighting) {
-        DocumentReference docRef = db.collection(ENTITY_NAME).document(URLEncoder.encode(sighting.getUrl(),
+        DocumentReference docRef = db.collection(ENTITY_NAME).document(URLEncoder.encode(sighting.url(),
             Charset.defaultCharset()));
         ApiFuture<DocumentSnapshot> future = docRef.get();
         DocumentSnapshot document;
