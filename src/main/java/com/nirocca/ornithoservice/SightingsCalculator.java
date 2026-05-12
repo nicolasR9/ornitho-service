@@ -1,10 +1,12 @@
 package com.nirocca.ornithoservice;
 
+import com.nirocca.ornithoalert.AllNotThisYearMain;
 import com.nirocca.ornithoalert.Constants.FilterMySightedSpecies;
 import com.nirocca.ornithoalert.Constants.SortBy;
 import com.nirocca.ornithoalert.Main;
 import com.nirocca.ornithoalert.OrnithoUrl;
 import com.nirocca.ornithoalert.model.Sighting;
+import com.nirocca.ornithoalert.model.SpeciesStatistic;
 import com.nirocca.ornithoalert.statistics.Species;
 import com.nirocca.ornithoalert.statistics.StatisticsCalculator;
 import java.io.IOException;
@@ -55,4 +57,7 @@ public class SightingsCalculator {
     }
 
 
+    public List<SpeciesStatistic> getLastSightingsNotThisYearAll() throws IOException {
+        return new AllNotThisYearMain().readFilteredStatistics();
+    }
 }

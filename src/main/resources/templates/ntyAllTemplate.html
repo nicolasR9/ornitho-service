@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>NTY All</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>count</th>
+    <th>URL</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sighting: ${sightings}">
+    <td th:text="${sighting.germanName}"></td>
+    <td th:text="${sighting.count}"></td>
+    <td><a href="url" target="_blank" th:href="${sighting.observationsLink}">url</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
