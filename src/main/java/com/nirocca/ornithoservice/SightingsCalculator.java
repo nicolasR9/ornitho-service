@@ -56,8 +56,11 @@ public class SightingsCalculator {
         return Main.calcSightings(OrnithoUrl.BRANDENBURG_LAST_2_DAYS.getUrl(), SortBy.SPECIES);
     }
 
-
     public List<SpeciesStatistic> getLastSightingsNotThisYearAll() throws IOException {
         return new AllNotThisYearMain().readFilteredStatistics();
+    }
+
+    public List<SpeciesStatistic> getLastSightingsNotThisYearAllVacation() throws IOException {
+        return new AllNotThisYearMain().readFilteredStatistics(SightingsController.VACATION_SETTINGS.statisticsAllUrl);
     }
 }
