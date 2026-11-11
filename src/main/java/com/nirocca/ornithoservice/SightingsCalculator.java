@@ -63,4 +63,10 @@ public class SightingsCalculator {
     public List<SpeciesStatistic> getLastSightingsNotThisYearAllVacation() throws IOException {
         return new AllNotThisYearMain().readFilteredStatistics(SightingsController.VACATION_SETTINGS.statisticsAllUrl);
     }
+
+    //local testing
+    public static void main(String[] args) throws IOException {
+        List<Sighting> lastSightingsVacation = new SightingsCalculator().getLastSightingsVacation(SightingsController.VACATION_SETTINGS.ornithoUrl);
+        System.out.println("SIZE: " + lastSightingsVacation.size());
+    }
 }

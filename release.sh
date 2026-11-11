@@ -1,6 +1,6 @@
 mvn versions:set -DnextSnapshot -DgenerateBackupPoms=false  && \
 mvn versions:use-latest-versions -DgenerateBackupPoms=false -DallowSnapshots=true -Dincludes=com.nirocca && \
-gcloud auth login nicolas.rocca@t-online.de && \
+gcloud auth login nicolas.rocca.klm@gmail.com && \
 gcloud config set project ornitho-service  && \
 mvn clean install -U && \
 mvn appengine:deploy && \
