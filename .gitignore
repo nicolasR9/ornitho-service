@@ -25,3 +25,4 @@ logs
 data
 *.log
 src/main/resources/sendgrid.properties
+src/main/resources/lifermap.properties
